@@ -1,0 +1,11 @@
+language: minimal
+os:
+  - osx
+script:
+  - brew install ./Formula/iptux.rb
+  - brew uninstall iptux
+  - brew install --HEAD ./Formula/iptux.rb
+  - brew uninstall iptux
+cache:
+  directories:
+    - /usr/local/Homebrew
