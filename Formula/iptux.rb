@@ -8,20 +8,33 @@ class Iptux < Formula
 
   depends_on :x11 => :optional
   depends_on 'gettext'
-  depends_on 'gtk+' unless build.head?
-  depends_on 'gtk+3' if build.head?
   depends_on 'jsoncpp'
   depends_on 'gstreamer' => :optional
   depends_on 'gst-plugins-base' => ["with-ogg", "with-libvorbis"] if build.with? "gstreamer"
   depends_on 'gst-plugins-good' if build.with? "gstreamer"
   depends_on 'pkg-config' => :build
-  depends_on 'cmake' => :build
+
+  if build.head?
+    depends_on 'gtk+3'
+    depends_on 'glog'
+    depends_on 'meson' => :build
+    depends_on 'ninja' => :build
+  else
+    depends_on 'gtk+'
+    depends_on 'cmake' => :build
+  end
+
   unless OS.mac?
     depends_on "linuxbrew/xorg/xorg"
   end
 
   def install
-    system "cmake", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}", "."
-    system "make", "install"
+    if build.head?
+      system "meson", "--prefix", prefix, "--buildtype", "release", "builddir"
+      system "ninja", "-C", "builddir", "install"
+    else
+      system "cmake", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}", "."
+      system "make", "install"
+    end
   end
 end
