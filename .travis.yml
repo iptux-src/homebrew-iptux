@@ -2,6 +2,7 @@ language: minimal
 os:
   - osx
 script:
+  - brew unlink nss
   - brew install ./Formula/iptux.rb
   - brew uninstall iptux
   - brew install --HEAD ./Formula/iptux.rb
