@@ -16,7 +16,7 @@ class Iptux < Formula
   if build.head?
     depends_on 'gtk+3'
     depends_on 'glog'
-    depends_on 'meson'
+    depends_on 'meson' => :build
     depends_on 'ninja' => :build
   else
     depends_on 'gtk+'
@@ -30,9 +30,9 @@ class Iptux < Formula
   def install
     if build.head?
       mkdir "build" do
-        system "meson", *std_meson_args, "-Dwith-vala=false", ".."
-        system "ninja", "-v"
-        system "ninja", "install", "-v"
+        system "/usr/local/opt/meson/bin/meson", *std_meson_args, "-Dwith-vala=false", ".."
+        system "/usr/local/opt/ninja/bin/ninja", "-v"
+        system "/usr/local/opt/ninja/bin/ninja", "install", "-v"
       end
     else
       system "cmake", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}", "."
