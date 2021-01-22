@@ -12,11 +12,11 @@ class Iptux < Formula
   depends_on 'gst-plugins-base' => ["with-ogg", "with-libvorbis"] if build.with? "gstreamer"
   depends_on 'gst-plugins-good' if build.with? "gstreamer"
   depends_on 'pkg-config' => :build
+  depends_on 'meson' => :build if build.head?
 
   if build.head?
     depends_on 'gtk+3'
     depends_on 'glog'
-    depends_on 'meson' => :build
     depends_on 'ninja' => :build
   else
     depends_on 'gtk+'
