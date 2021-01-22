@@ -6,7 +6,6 @@ class Iptux < Formula
   url 'https://github.com/iptux-src/iptux/archive/v0.7.5.tar.gz'
   sha256 '37fd2618e888d44b3ddcc21e2d497f0a8dcbdb2adcb23fd137fb8e56d2d46919'
 
-  depends_on :x11 => :optional
   depends_on 'gettext'
   depends_on 'jsoncpp'
   depends_on 'gstreamer' => :optional
