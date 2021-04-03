@@ -29,7 +29,7 @@ class Iptux < Formula
 
   def install
     if build.head?
-      system bin/"meson", *std_meson_args, "-Dwith-vala=false", "builddir"
+      system "meson", *std_meson_args, "-Dwith-vala=false", "builddir"
       system "/usr/local/opt/ninja/bin/ninja", "-C", "builddir", "-v"
       system "/usr/local/opt/ninja/bin/ninja", "-C", "builddir", "install", "-v"
     else
