@@ -29,11 +29,9 @@ class Iptux < Formula
 
   def install
     if build.head?
-      mkdir "build" do
-        system bin/"meson", *std_meson_args, "-Dwith-vala=false", ".", ".."
-        system "/usr/local/opt/ninja/bin/ninja", "-v"
-        system "/usr/local/opt/ninja/bin/ninja", "install", "-v"
-      end
+      system bin/"meson", *std_meson_args, "-Dwith-vala=false", "builddir"
+      system "/usr/local/opt/ninja/bin/ninja", "-C", "builddir", "-v"
+      system "/usr/local/opt/ninja/bin/ninja", "-C", "builddir", "install", "-v"
     else
       system "cmake", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}", "."
       system "make", "install"
