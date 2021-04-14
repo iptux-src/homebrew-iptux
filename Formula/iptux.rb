@@ -1,40 +1,29 @@
-require 'formula'
-
 class Iptux < Formula
-  head 'https://github.com/iptux-src/iptux.git'
-  homepage 'https://github.com/iptux-src/iptux'
-  url 'https://github.com/iptux-src/iptux/archive/v0.7.5.tar.gz'
-  sha256 '37fd2618e888d44b3ddcc21e2d497f0a8dcbdb2adcb23fd137fb8e56d2d46919'
+  desc "Intranet communication tool"
+  homepage "https://github.com/iptux-src/iptux"
+  url "https://github.com/iptux-src/iptux/archive/v0.8.0.tar.gz"
+  sha256 "ecaf1ff2b9486db753419a63aea52062fd46ecbdf32784ae96fae51eabc74407"
+  head "https://github.com/iptux-src/iptux.git"
 
-  depends_on 'gettext'
-  depends_on 'jsoncpp'
-  depends_on 'gstreamer' => :optional
-  depends_on 'gst-plugins-base' => ["with-ogg", "with-libvorbis"] if build.with? "gstreamer"
-  depends_on 'gst-plugins-good' if build.with? "gstreamer"
-  depends_on 'pkg-config' => :build
-
-  if build.head?
-    depends_on 'gtk+3'
-    depends_on 'glog'
-    depends_on 'meson' => :build
-    depends_on 'ninja' => :build
-  else
-    depends_on 'gtk+'
-    depends_on 'cmake' => :build
-  end
-
-  unless OS.mac?
-    depends_on "linuxbrew/xorg/xorg"
-  end
+  depends_on "meson" => :build
+  depends_on "ninja" => :build
+  depends_on "pkg-config" => :build
+  depends_on "gettext"
+  depends_on "glog"
+  depends_on "gtk+3"
+  depends_on "gtk-mac-integration"
+  depends_on "jsoncpp"
+  depends_on "libsigc++@2"
+  depends_on "terminal-notifier"
+  depends_on "linuxbrew/xorg/xorg" unless OS.mac?
 
   def install
-    if build.head?
-      system "meson", *std_meson_args, "-Dwith-vala=false", "builddir"
-      system "/usr/local/opt/ninja/bin/ninja", "-C", "builddir", "-v"
-      system "/usr/local/opt/ninja/bin/ninja", "-C", "builddir", "install", "-v"
-    else
-      system "cmake", "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}", "."
-      system "make", "install"
-    end
+    system "meson", *std_meson_args, "builddir"
+    system "ninja", "-C", "builddir", "-v"
+    system "ninja", "-C", "builddir", "install", "-v"
+  end
+
+  test do
+    system bin/"iptux", "--version"
   end
 end
