@@ -15,7 +15,6 @@ class Iptux < Formula
   depends_on "jsoncpp"
   depends_on "libsigc++@2"
   depends_on "terminal-notifier"
-  depends_on "linuxbrew/xorg/xorg" unless OS.mac?
 
   def install
     system "meson", *std_meson_args, "builddir"
