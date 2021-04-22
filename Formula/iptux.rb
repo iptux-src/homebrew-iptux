@@ -11,10 +11,10 @@ class Iptux < Formula
   depends_on "gettext"
   depends_on "glog"
   depends_on "gtk+3"
-  depends_on "gtk-mac-integration" unless OS.mac?
+  depends_on "gtk-mac-integration" if OS.mac?
   depends_on "jsoncpp"
   depends_on "libsigc++@2"
-  depends_on "terminal-notifier" unless OS.mac?
+  depends_on "terminal-notifier" if OS.mac?
 
   def install
     system "meson", *std_meson_args, "builddir"
