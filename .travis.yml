@@ -4,8 +4,10 @@ os:
 script:
   - brew unlink nss
   - brew install ./Formula/iptux.rb
+  - iptux --version
   - brew uninstall iptux
   - brew install --HEAD ./Formula/iptux.rb
+  - iptux --version
   - brew uninstall iptux
 cache:
   directories:
