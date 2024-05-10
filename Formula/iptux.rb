@@ -1,13 +1,14 @@
 class Iptux < Formula
   desc "Intranet communication tool"
   homepage "https://github.com/iptux-src/iptux"
-  url "https://github.com/iptux-src/iptux/archive/v0.8.5.tar.gz"
-  sha256 "d3699852c78bc6f1d1e5f2908a9ce02cc239056b73b6d91dbd5da1d7fdaf1a82"
+  url "https://github.com/iptux-src/iptux/archive/v0.9.0.tar.gz"
+  sha256 "1f5ccec79655cc786d6de6c2f61c8deb6b8913a2ad1f4c56ac1268536b6e1a2e"
   head "https://github.com/iptux-src/iptux.git"
 
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
+  depends_on "appstream" => :build
   depends_on "gettext"
   depends_on "glog"
   depends_on "gtk+3"
