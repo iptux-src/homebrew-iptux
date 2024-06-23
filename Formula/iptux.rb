@@ -1,8 +1,8 @@
 class Iptux < Formula
   desc "Intranet communication tool"
   homepage "https://github.com/iptux-src/iptux"
-  url "https://github.com/iptux-src/iptux/archive/v0.9.2.tar.gz"
-  sha256 "83692ac4b2a348b281aaebe10af343214781d1a4d548549e3fcd503bc7abc1ef"
+  url "https://github.com/iptux-src/iptux/archive/v0.9.3.tar.gz"
+  sha256 "74f123e98026f55f711e0b232944b884b535a28ab87eccab01dafd3dcc07a390"
   head "https://github.com/iptux-src/iptux.git"
 
   depends_on "meson" => :build
