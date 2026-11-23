@@ -1,0 +1,36 @@
+name: Homebrew CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    name: Test ${{ matrix.build }}
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        build: [stable, head]
+
+    steps:
+      - name: Check out tap
+        uses: actions/checkout@v4
+
+      - name: Configure local tap
+        run: |
+          tap_dir="$(brew --repository)/Library/Taps/iptux-src/homebrew-iptux"
+          mkdir -p "$(dirname "$tap_dir")"
+          ln -s "$GITHUB_WORKSPACE" "$tap_dir"
+
+      - name: Install formula
+        run: |
+          if [ "${{ matrix.build }}" = "head" ]; then
+            brew install --HEAD --build-from-source iptux-src/iptux/iptux
+          else
+            brew install --build-from-source iptux-src/iptux/iptux
+          fi
+
+      - name: Test formula
+        run: brew test iptux-src/iptux/iptux

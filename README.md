@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.com/iptux-src/homebrew-iptux.svg?branch=master)](https://travis-ci.com/iptux-src/homebrew-iptux)
+[![Homebrew CI](https://github.com/iptux-src/homebrew-iptux/actions/workflows/ci.yml/badge.svg)](https://github.com/iptux-src/homebrew-iptux/actions/workflows/ci.yml)
