@@ -18,13 +18,19 @@ jobs:
       - name: Check out tap
         uses: actions/checkout@v4
 
+      - name: Configure local tap
+        run: |
+          brew tap-new --no-git iptux-src/iptux
+          cp Formula/iptux.rb \
+            "$(brew --repository)/Library/Taps/iptux-src/homebrew-iptux/Formula/iptux.rb"
+
       - name: Install formula
         run: |
           if [ "${{ matrix.build }}" = "head" ]; then
-            brew install --HEAD --build-from-source ./Formula/iptux.rb
+            brew install --HEAD --build-from-source iptux-src/iptux/iptux
           else
-            brew install --build-from-source ./Formula/iptux.rb
+            brew install --build-from-source iptux-src/iptux/iptux
           fi
 
       - name: Test formula
-        run: brew test iptux
+        run: brew test iptux-src/iptux/iptux
