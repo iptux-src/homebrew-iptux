@@ -1,8 +1,8 @@
 class Iptux < Formula
   desc "Intranet communication tool"
   homepage "https://github.com/iptux-src/iptux"
-  url "https://github.com/iptux-src/iptux.git", tag: "v0.9.4"
-  sha256 "8af01c724ba19270014e4c84df7884778654c9f4f1c66a15554c9d7dd5547edc"
+  url "https://github.com/iptux-src/iptux.git", tag: "v0.9.5"
+  sha256 "97c3fd606d1b5da8e675117d007a11bdf392105d485bd92f984eaaff2470033f"
   head "https://github.com/iptux-src/iptux.git", branch: "master"
 
   depends_on "appstream" => :build
