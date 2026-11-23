@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: Test ${{ matrix.build }}
-    runs-on: macos-14
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -20,13 +20,14 @@ jobs:
 
       - name: Configure local tap
         run: |
-          tap_dir="$(brew --repository)/Library/Taps/iptux-src/homebrew-iptux"
-          mkdir -p "$(dirname "$tap_dir")"
-          ln -s "$GITHUB_WORKSPACE" "$tap_dir"
+          brew tap-new --no-git iptux-src/iptux
+          cp Formula/iptux.rb \
+            "$(brew --repository)/Library/Taps/iptux-src/homebrew-iptux/Formula/iptux.rb"
 
       - name: Install formula
         run: |
           if [ "${{ matrix.build }}" = "head" ]; then
+            brew install gobject-introspection
             brew install --HEAD --build-from-source iptux-src/iptux/iptux
           else
             brew install --build-from-source iptux-src/iptux/iptux

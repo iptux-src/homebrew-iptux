@@ -19,7 +19,8 @@ class Iptux < Formula
   depends_on "terminal-notifier" if OS.mac?
 
   def install
-    system "meson", "setup", "builddir", "-Dstatic-link=true", *std_meson_args
+    meson_args = ["-Dstatic-link=true"] unless build.head?
+    system "meson", "setup", "builddir", *meson_args.to_a, *std_meson_args
     system "ninja", "-C", "builddir", "-v"
     system "ninja", "-C", "builddir", "install", "-v"
   end
