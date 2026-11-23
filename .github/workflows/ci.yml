@@ -27,7 +27,6 @@ jobs:
       - name: Install formula
         run: |
           if [ "${{ matrix.build }}" = "head" ]; then
-            brew install gobject-introspection
             brew install --HEAD --build-from-source iptux-src/iptux/iptux
           else
             brew install --build-from-source iptux-src/iptux/iptux

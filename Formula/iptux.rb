@@ -3,10 +3,12 @@ class Iptux < Formula
   homepage "https://github.com/iptux-src/iptux"
   url "https://github.com/iptux-src/iptux.git", tag: "v0.9.5"
   sha256 "97c3fd606d1b5da8e675117d007a11bdf392105d485bd92f984eaaff2470033f"
-  head "https://github.com/iptux-src/iptux.git", branch: "main"
+  head do
+    url "https://github.com/iptux-src/iptux.git", branch: "main"
+    depends_on "gobject-introspection" => :build
+  end
 
   depends_on "appstream" => :build
-  depends_on "gobject-introspection" => :build if build.head?
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
