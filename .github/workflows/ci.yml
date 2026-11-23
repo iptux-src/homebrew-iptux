@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: Test ${{ matrix.build }}
-    runs-on: macos-14
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -18,19 +18,13 @@ jobs:
       - name: Check out tap
         uses: actions/checkout@v4
 
-      - name: Configure local tap
-        run: |
-          tap_dir="$(brew --repository)/Library/Taps/iptux-src/homebrew-iptux"
-          mkdir -p "$(dirname "$tap_dir")"
-          ln -s "$GITHUB_WORKSPACE" "$tap_dir"
-
       - name: Install formula
         run: |
           if [ "${{ matrix.build }}" = "head" ]; then
-            brew install --HEAD --build-from-source iptux-src/iptux/iptux
+            brew install --HEAD --build-from-source ./Formula/iptux.rb
           else
-            brew install --build-from-source iptux-src/iptux/iptux
+            brew install --build-from-source ./Formula/iptux.rb
           fi
 
       - name: Test formula
-        run: brew test iptux-src/iptux/iptux
+        run: brew test iptux
