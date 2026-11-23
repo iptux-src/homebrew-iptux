@@ -6,7 +6,7 @@ class Iptux < Formula
   head "https://github.com/iptux-src/iptux.git", branch: "main"
 
   depends_on "appstream" => :build
-  depends_on "gobject-introspection" => :build
+  depends_on "gobject-introspection" => :build if build.head?
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
